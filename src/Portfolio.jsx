@@ -136,8 +136,8 @@ function ContactForm({ onClose }) {
   };
 
   return (
-    <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2000 }}>
-      <div style={{ background: "#050A0F", border: "1px solid rgba(0,229,255,0.3)", borderRadius: 12, padding: 40, maxWidth: 500, width: "90%" }}>
+    <div style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 2000, padding: 16 }}>
+      <div className="contact-modal" style={{ background: "#050A0F", border: "1px solid rgba(0,229,255,0.3)", borderRadius: 12, padding: 40, maxWidth: 500, width: "100%" }}>
         {submitted ? (
           <div style={{ textAlign: "center" }}>
             <div style={{ fontSize: "3rem", marginBottom: 16 }}>✅</div>
@@ -161,7 +161,7 @@ function ContactForm({ onClose }) {
                 <textarea name="message" value={formData.message} onChange={handleChange} rows="4" style={{ width: "100%", padding: "10px 12px", background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: 6, color: "#E8F4F8", fontFamily: "inherit", fontSize: "0.95rem", resize: "none" }} />
               </div>
               {error && <p style={{ color: "#FF6B6B", marginBottom: 16, fontSize: "0.85rem" }}>⚠️ {error}</p>}
-              <div style={{ display: "flex", gap: 12 }}>
+              <div className="modal-actions" style={{ display: "flex", gap: 12 }}>
                 <button type="submit" style={{ flex: 1, padding: "12px 20px", background: "#00E5FF", color: "#050A0F", fontWeight: 700, border: "none", borderRadius: 6, cursor: "pointer", fontSize: "0.9rem" }}>Send Message</button>
                 <button type="button" onClick={onClose} style={{ flex: 1, padding: "12px 20px", background: "transparent", color: "#E8F4F8", border: "1px solid rgba(255,255,255,0.2)", borderRadius: 6, cursor: "pointer", fontSize: "0.9rem" }}>Close</button>
               </div>
@@ -251,9 +251,6 @@ export default function Portfolio() {
         .btn-outline:hover { border-color: #00E5FF; color: #00E5FF; transform: translateY(-2px); }
 
         .neon-avatar-shell { position: relative; display: inline-block; z-index: 1; }
-        .neon-ring { position: absolute; inset: -20px; border-radius: 50%; background: conic-gradient(from 0deg, rgba(0,229,255,0.4), rgba(123,108,246,0.35), rgba(0,229,255,0.25), rgba(123,108,246,0.2)); filter: blur(20px); pointer-events: none; animation: spin 6s linear infinite; }
-        .neon-dot { position: absolute; top: 50%; left: 50%; width: 16px; height: 16px; border-radius: 50%; background: radial-gradient(circle, rgba(0,255,255,0.95) 0%, rgba(0,255,255,0.2) 55%, transparent 100%); box-shadow: 0 0 20px rgba(0,255,255,0.85), 0 0 40px rgba(123,108,246,0.35); transform: translate(-50%, -50%) rotate(0deg) translateX(145px); transform-origin: center; animation: orbit 4s linear infinite; pointer-events: none; }
-        .neon-ring-border { position: absolute; inset: -12px; border-radius: 50%; border: 1.5px solid rgba(0,229,255,0.35); filter: blur(1px); pointer-events: none; }
         .neon-avatar-frame { position: relative; width: 280px; height: 280px; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, rgba(0,229,255,0.45), rgba(123,108,246,0.55)); }
         .neon-avatar-frame img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
 
@@ -262,11 +259,38 @@ export default function Portfolio() {
 
         @media (max-width: 768px) {
           .desktop-nav { display: none !important; }
+          .nav-cta { display: none !important; }
           .hamburger { display: flex !important; }
-          .hero-name { font-size: 2.8rem !important; }
           .two-col { grid-template-columns: 1fr !important; }
           .three-col { grid-template-columns: 1fr !important; }
           .stat-row { grid-template-columns: 1fr 1fr !important; }
+          .hero-section { min-height: auto !important; padding: 96px 20px 48px !important; }
+          .hero-layout { gap: 36px !important; text-align: center; }
+          .hero-copy { order: 2; }
+          .hero-avatar { order: 1; margin: 0 auto; }
+          .hero-name { font-size: clamp(2.35rem, 14vw, 3.6rem) !important; white-space: normal !important; overflow-wrap: anywhere; }
+          .hero-bio { margin-left: auto; margin-right: auto; }
+          .hero-actions { justify-content: center; }
+          .neon-avatar-frame { width: min(72vw, 240px); height: min(72vw, 240px); }
+          .section-block { padding: 72px 20px !important; }
+          .section-title { margin-bottom: 32px; }
+          .card { padding: 22px !important; }
+          .education-row { gap: 14px !important; }
+          .education-meta { width: 100%; text-align: left !important; }
+          .contact-link { min-width: 0; }
+          .contact-link > div { min-width: 0; }
+          .contact-value { overflow-wrap: anywhere; }
+          .contact-modal { padding: 24px !important; max-height: calc(100vh - 32px); overflow-y: auto; }
+        }
+        @media (max-width: 480px) {
+          .stat-row { grid-template-columns: 1fr !important; }
+          .stat-box { padding: 20px 12px; }
+          .stat-num { font-size: 2.1rem; }
+          .btn-primary, .btn-outline { width: 100%; justify-content: center; padding-left: 18px; padding-right: 18px; }
+          .hero-actions { width: 100%; }
+          .mobile-menu { gap: 24px; }
+          .mobile-nav-link { font-size: 1.25rem; }
+          .modal-actions { flex-direction: column; }
         }
         .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; z-index: 1001; }
         .hamburger span { width: 24px; height: 2px; background: #E8F4F8; border-radius: 1px; transition: all 0.3s; }
@@ -288,7 +312,7 @@ export default function Portfolio() {
               <span key={item} className={`nav-link ${active === item ? "active" : ""}`} onClick={() => scrollTo(item)}>{item}</span>
             ))}
           </div>
-          <a onClick={() => setContactOpen(true)} className="btn-primary" style={{ fontSize: "0.75rem", padding: "8px 18px", display: "inline-flex", cursor: "pointer" }}>Hire Me</a>
+          <a onClick={() => setContactOpen(true)} className="btn-primary nav-cta" style={{ fontSize: "0.75rem", padding: "8px 18px", display: "inline-flex", cursor: "pointer" }}>Hire Me</a>
           <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
             <span /><span /><span />
           </div>
@@ -305,27 +329,27 @@ export default function Portfolio() {
       )}
 
       {/* Hero */}
-      <section id="About" style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "100px clamp(16px, 5vw, 80px) 60px", position: "relative" }}>
+      <section id="About" className="hero-section" style={{ minHeight: "100vh", display: "flex", alignItems: "center", padding: "100px clamp(16px, 5vw, 80px) 60px", position: "relative" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto", width: "100%" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 60, alignItems: "center" }} className="two-col">
-            <div>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 60, alignItems: "center" }} className="two-col hero-layout">
+            <div className="hero-copy">
               <div className="fade-up fade-up-1">
                 <span className="hero-tag">Available for Opportunities</span>
               </div>
-              <h1 className="fade-up fade-up-2" style={{ fontSize: "clamp(2.5rem, 7vw, 5rem)", fontWeight: 800, lineHeight: 1.05, marginBottom: 24, whiteSpace: "nowrap" }} id="hero-name">
+              <h1 className="fade-up fade-up-2 hero-name" style={{ fontSize: "clamp(2.5rem, 7vw, 5rem)", fontWeight: 800, lineHeight: 1.05, marginBottom: 24, whiteSpace: "nowrap" }}>
                 <span className="glow-text">{data.name}</span>
               </h1>
-              <p className="fade-up fade-up-3" style={{ fontSize: "clamp(0.95rem, 2vw, 1.1rem)", color: "#8899AA", lineHeight: 1.8, maxWidth: 520, marginBottom: 36 }}>
+              <p className="fade-up fade-up-3 hero-bio" style={{ fontSize: "clamp(0.95rem, 2vw, 1.1rem)", color: "#8899AA", lineHeight: 1.8, maxWidth: 520, marginBottom: 36 }}>
                 {data.bio}
               </p>
-              <div className="fade-up fade-up-4" style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
+              <div className="fade-up fade-up-4 hero-actions" style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
                 <a href={data.contact.github} target="_blank" rel="noreferrer" className="btn-primary">View GitHub →</a>
                 <a onClick={() => setContactOpen(true)} className="btn-outline" style={{ cursor: "pointer" }}>Contact Me</a>
               </div>
             </div>
 
             {/* Avatar card */}
-            <div className="fade-up fade-up-3 neon-avatar-shell" style={{ textAlign: "center" }}>
+            <div className="fade-up fade-up-3 neon-avatar-shell hero-avatar" style={{ textAlign: "center" }}>
               <div className="neon-ring" />
               <div className="neon-ring-border" />
               <div className="neon-dot" />
@@ -355,7 +379,7 @@ export default function Portfolio() {
       </section>
 
       {/* Skills */}
-      <section id="Skills" style={{ padding: "100px clamp(16px, 5vw, 80px)", position: "relative" }}>
+      <section id="Skills" className="section-block" style={{ padding: "100px clamp(16px, 5vw, 80px)", position: "relative" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div className="section-label">What I Know</div>
           <h2 className="section-title">Skills & <span className="glow-text">Expertise</span></h2>
@@ -409,7 +433,7 @@ export default function Portfolio() {
       </section>
 
       {/* Projects */}
-      <section id="Projects" style={{ padding: "100px clamp(16px, 5vw, 80px)", background: "rgba(255,255,255,0.01)", position: "relative" }}>
+      <section id="Projects" className="section-block" style={{ padding: "100px clamp(16px, 5vw, 80px)", background: "rgba(255,255,255,0.01)", position: "relative" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div className="section-label">What I've Built</div>
           <h2 className="section-title">Featured <span className="glow-text">Projects</span></h2>
@@ -430,13 +454,13 @@ export default function Portfolio() {
       </section>
 
       {/* Education */}
-      <section id="Education" style={{ padding: "100px clamp(16px, 5vw, 80px)" }}>
+      <section id="Education" className="section-block" style={{ padding: "100px clamp(16px, 5vw, 80px)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div className="section-label">Academic Journey</div>
           <h2 className="section-title">Education <span className="glow-text">Background</span></h2>
           <div style={{ display: "flex", flexDirection: "column", gap: 0 }}>
             {data.education.map((e, i) => (
-              <div key={i} style={{ display: "flex", gap: 24 }}>
+              <div key={i} className="education-row" style={{ display: "flex", gap: 24 }}>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", paddingTop: 4 }}>
                   <div className="timeline-dot" />
                   {i < data.education.length - 1 && <div className="timeline-line" style={{ height: 60 }} />}
@@ -447,7 +471,7 @@ export default function Portfolio() {
                       <h3 style={{ fontWeight: 700, fontSize: "1rem" }}>{e.degree}</h3>
                       <p style={{ fontSize: "0.82rem", color: "#8899AA", marginTop: 4 }}>{e.place}</p>
                     </div>
-                    <div style={{ textAlign: "right" }}>
+                    <div className="education-meta" style={{ textAlign: "right" }}>
                       <div style={{ fontFamily: "'Space Mono', monospace", fontSize: "0.7rem", color: "#00E5FF", background: "rgba(0,229,255,0.08)", border: "1px solid rgba(0,229,255,0.2)", padding: "3px 10px", borderRadius: 3 }}>{e.year}</div>
                       <div style={{ marginTop: 6, fontSize: "0.85rem", fontWeight: 700, color: "#7B6CF6" }}>{e.grade}</div>
                     </div>
@@ -460,7 +484,7 @@ export default function Portfolio() {
       </section>
 
       {/* Experience */}
-      <section id="Experience" style={{ padding: "100px clamp(16px, 5vw, 80px)", background: "rgba(255,255,255,0.01)" }}>
+      <section id="Experience" className="section-block" style={{ padding: "100px clamp(16px, 5vw, 80px)", background: "rgba(255,255,255,0.01)" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <div className="section-label">Where I've Worked</div>
           <h2 className="section-title">Internship <span className="glow-text">Experience</span></h2>
@@ -495,7 +519,7 @@ export default function Portfolio() {
       </section>
 
       {/* Contact */}
-      <section id="Contact" style={{ padding: "100px clamp(16px, 5vw, 80px) 60px" }}>
+      <section id="Contact" className="section-block" style={{ padding: "100px clamp(16px, 5vw, 80px) 60px" }}>
         <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}>
           <div className="section-label">Get In Touch</div>
           <h2 className="section-title" style={{ marginBottom: 16 }}>Let's <span className="glow-text">Connect</span></h2>
@@ -514,7 +538,7 @@ export default function Portfolio() {
                 <span style={{ fontSize: "1.3rem" }}>{c.icon}</span>
                 <div>
                   <div style={{ fontSize: "0.7rem", color: "#8899AA", marginBottom: 2, letterSpacing: "0.08em" }}>{c.label}</div>
-                  <div style={{ fontSize: "0.85rem", fontWeight: 600 }}>{c.value}</div>
+                  <div className="contact-value" style={{ fontSize: "0.85rem", fontWeight: 600 }}>{c.value}</div>
                 </div>
               </a>
             ))}
